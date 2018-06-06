@@ -96,6 +96,8 @@ module.exports = class BYAML_Creator
         {
             this.file.writeString(name);
         });
+
+        this.file.alignTo(4);
     }
 
     /**
@@ -230,11 +232,20 @@ module.exports = class BYAML_Creator
     {
         this.headerData.nameTableOffset = this.HEADER_SIZE;
         this.nameTable.offset = this.headerData.nameTableOffset + (this.nameTable.count() * 4) + 8;
-
-        this.headerData.stringTableOffset = this.nameTable.offset + this.nameTable.size();
+        
+        this.headerData.stringTableOffset = this._alignOffset(this.nameTable.offset + this.nameTable.size());
         this.stringTable.offset = this.headerData.stringTableOffset + (this.stringTable.count() * 4) + 8;
 
-        this.headerData.rootNodeOffset = this.stringTable.offset + this.stringTable.size();
+        this.headerData.rootNodeOffset = this._alignOffset(this.stringTable.offset + this.stringTable.size());
+    }
+
+    /**
+     * aligns a offset to the 4 byte alignment, used by string tables
+     * @param {number} offset 
+     */
+    _alignOffset(offset)
+    {
+        return Math.ceil(offset / 4) * 4;
     }
 
     /**
