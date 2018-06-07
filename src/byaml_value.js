@@ -19,4 +19,9 @@ module.exports = class BYAML_Value
         this.type  = type;
         this.value = value;
     }
+
+    copy()
+    {
+        return new BYAML_Value(this.type, this.value);
+    }
 };
