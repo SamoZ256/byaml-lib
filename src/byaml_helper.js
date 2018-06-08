@@ -22,4 +22,18 @@ module.exports = class BYAML_Helper
         if(idByName[typeName])
             return new BYAML_Value(idByName[typeName], value);
     }
+
+    static deepCopy(data)
+    {
+        if(data instanceof BYAML_Value)
+            return data.copy();
+
+        const newData = {};
+        for(let name in data)
+        {
+            newData[name] = BYAML_Helper.deepCopy(data[name]);
+        }
+        
+        return newData;
+    }
 };
