@@ -36,4 +36,30 @@ module.exports = class BYAML_Helper
         
         return newData;
     }
+
+    static toJSON(data)
+    {
+        return JSON.stringify(data, null, 4);
+    }
+
+    static fromJSON(str)
+    {
+        let byamlObj = JSON.parse(str);
+        return BYAML_Helper._addObjectTypes(byamlObj);
+    }
+
+    static _addObjectTypes(obj)
+    {
+        if(obj.hasOwnProperty("type") && obj.hasOwnProperty("value"))
+        {
+            return new BYAML_Value(obj.type, obj.value);
+        }
+
+        for(const name in obj)
+        {
+            obj[name] = BYAML_Helper._addObjectTypes(obj[name]);
+        }
+
+        return obj;
+    }
 };
