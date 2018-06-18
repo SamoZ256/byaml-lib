@@ -25,16 +25,9 @@ module.exports = class BYAML_Helper
 
     static deepCopy(data)
     {
-        if(data instanceof BYAML_Value)
-            return data.copy();
-
-        const newData = {};
-        for(let name in data)
-        {
-            newData[name] = BYAML_Helper.deepCopy(data[name]);
-        }
-        
-        return newData;
+        return BYAML_Helper.fromJSON(
+            BYAML_Helper.toJSON(data)
+        );
     }
 
     static toJSON(data)
