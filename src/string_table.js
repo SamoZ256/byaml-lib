@@ -29,7 +29,7 @@ module.exports = class String_Table
         {
             this.indexArray[str] = this.data.size;
             this.data.set(str, this.size());
-            this.sizeBytes += str.length + 1;
+            this.sizeBytes += Buffer.byteLength(str, 'utf8') + 1;
         }
     }
 
