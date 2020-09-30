@@ -69,7 +69,7 @@ module.exports = class String_Table
         this.forEach((val, key, map) =>
         {
             map.set(key, offset);
-            offset += key.length + 1;
+            offset += Buffer.byteLength(key, 'utf8') + 1;
 
             this.indexArray[key] = i++;
         });
