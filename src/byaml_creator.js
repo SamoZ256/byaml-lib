@@ -161,6 +161,7 @@ module.exports = class BYAML_Creator
             case this.TYPE_DICTIONARY_NODE:
 
                 let keys = Object.keys(node);
+                keys.sort();
                 this._writeNodeHeader(this.TYPE_DICTIONARY_NODE, keys.length);
 
                 nextFreeOffset = this.file.pos() + (keys.length * this.NODE_SIZE);
