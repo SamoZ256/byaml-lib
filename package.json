@@ -11,6 +11,6 @@
     "mocha": "^5.0.4"
   },
   "dependencies": {
-    "binary-file": "NiceneNerd/binary-file"
+    "binary-file": "SamoZ256/binary-file"
   }
 }
